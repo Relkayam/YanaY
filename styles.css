@@ -1,0 +1,136 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #87CEEB;
+}
+
+.scene {
+    position: relative;
+    width: 100%;
+    height: 300px;
+}
+
+.turtle {
+    position: absolute;
+    bottom: 50px;
+    left: 0;
+    width: 100px;
+    height: 60px;
+    animation: run 8s linear infinite;
+}
+
+.shell {
+    position: absolute;
+    width: 60px;
+    height: 40px;
+    background: #2E7D32;
+    border-radius: 30px 30px 0 0;
+    top: 0;
+    left: 20px;
+}
+
+.head {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: #1B5E20;
+    border-radius: 50%;
+    left: 75px;
+    top: 15px;
+    animation: head 0.5s alternate infinite;
+}
+
+.leg {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background: #1B5E20;
+    border-radius: 50%;
+}
+
+.leg1 {
+    left: 25px;
+    top: 35px;
+    animation: legMove 0.5s alternate infinite;
+}
+
+.leg2 {
+    left: 45px;
+    top: 35px;
+    animation: legMove 0.5s alternate infinite 0.1s;
+}
+
+.leg3 {
+    left: 60px;
+    top: 35px;
+    animation: legMove 0.5s alternate infinite 0.2s;
+}
+
+.leg4 {
+    left: 80px;
+    top: 35px;
+    animation: legMove 0.5s alternate infinite 0.3s;
+}
+
+.tail {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background: #1B5E20;
+    border-radius: 7px 0 0 7px;
+    left: 10px;
+    top: 20px;
+    animation: tail 0.5s alternate infinite;
+}
+
+.ground {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+    background: #8B4513;
+}
+
+@keyframes run {
+    from {
+        left: -100px;
+    }
+    to {
+        left: 100%;
+    }
+}
+
+@keyframes legMove {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(-5px);
+    }
+}
+
+@keyframes head {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(2px);
+    }
+}
+
+@keyframes tail {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(-10deg);
+    }
+} 
