@@ -13,6 +13,14 @@ let moveSpeed = 5; // Movement speed for arrow keys
 let jumpForwardSpeed = 3; // Forward movement speed during jump
 let isMovingForward = false;
 let isMovingBackward = false;
+let obstacleSpeed = 5; // Initial obstacle speed
+let speedIncreaseInterval = null;
+
+// Speed increase function
+function increaseSpeed() {
+    obstacleSpeed += 2; // Increase speed by 2 pixels per frame every 20 seconds
+    console.log('Speed increased to:', obstacleSpeed);
+}
 
 // Handle keyboard controls
 function handleKeyDown(e) {
@@ -101,7 +109,7 @@ function moveObstacle() {
             score++;
             scoreDisplay.textContent = `Score: ${score}`;
         } else {
-            position -= 5;
+            position -= obstacleSpeed; // Use the variable speed
         }
         
         obstacle.style.right = `${window.innerWidth - position}px`;
@@ -134,9 +142,12 @@ function gameOver() {
     isGameOver = true;
     gameOverScreen.classList.remove('hidden');
     
-    // Stop all animations
+    // Stop all animations and intervals
     if (animationFrame) {
         cancelAnimationFrame(animationFrame);
+    }
+    if (speedIncreaseInterval) {
+        clearInterval(speedIncreaseInterval);
     }
     
     // Remove jumping class if game ends during jump
@@ -155,6 +166,7 @@ function restartGame() {
     isMovingBackward = false;
     score = 0;
     turtlePosition = 100;
+    obstacleSpeed = 5; // Reset obstacle speed
     scoreDisplay.textContent = 'Score: 0';
     gameOverScreen.classList.add('hidden');
     obstacle.style.right = '-50px';
@@ -163,6 +175,12 @@ function restartGame() {
     // Restore animations
     document.querySelector('.head').style.animation = 'head 0.5s alternate infinite';
     document.querySelector('.tail').style.animation = 'tail 0.5s alternate infinite';
+    
+    // Start speed increase interval
+    if (speedIncreaseInterval) {
+        clearInterval(speedIncreaseInterval);
+    }
+    speedIncreaseInterval = setInterval(increaseSpeed, 20000); // Increase speed every 20 seconds
     
     // Start movements
     moveObstacle();
@@ -176,4 +194,6 @@ restartButton.addEventListener('click', restartGame);
 
 // Start the game
 moveObstacle();
-moveTurtle(); 
+moveTurtle();
+// Start speed increase interval
+speedIncreaseInterval = setInterval(increaseSpeed, 20000); 
